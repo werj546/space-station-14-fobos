@@ -6285,3 +6285,10 @@ Entries:
   changes:
   - type: Fix
     message: Спрайт пчёлок откачен до старого, предназначен для другого :face_holding_back_tears:.
+- id: 610
+  author: Atickov
+  time: '2026-08-18T18:12:53.528977+00:00'
+  pr: 2176
+  changes:
+  - type: Fix
+    message: Баги локализации
