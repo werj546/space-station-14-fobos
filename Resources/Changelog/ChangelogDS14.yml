@@ -6263,3 +6263,11 @@ Entries:
   changes:
   - type: Tweak
     message: Спрайты гарнитур
+- id: 607
+  author: KillFroozy
+  time: '2026-08-18T13:46:48.782947+00:00'
+  pr: 2182
+  changes:
+  - type: Fix
+    message: спрайт пушистого хвоста таяр спереди теперь не выше на пиксель на один
+      кадр.
