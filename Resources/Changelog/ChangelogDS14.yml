@@ -6271,3 +6271,10 @@ Entries:
   - type: Fix
     message: спрайт пушистого хвоста таяр спереди теперь не выше на пиксель на один
       кадр.
+- id: 608
+  author: pe4enkakris
+  time: '2026-08-18T16:09:10.199299+00:00'
+  pr: 2170
+  changes:
+  - type: Tweak
+    message: Спрайт кирок и спрайт пчелы by Nano_Jump
