@@ -2,8 +2,7 @@
   id: HorseEars
   bodyPart: HeadTop
   markingCategory: HeadTop
-  speciesRestriction: [Human, Dwarf, Felinid]
-  sponsorOnly: True
+  speciesRestriction: [Human, Dwarf, Felinid, SlimePerson]
   coloring:
     default:
       type:
@@ -32,8 +31,7 @@
   id: HorseTail
   bodyPart: Tail
   markingCategory: Tail
-  speciesRestriction: [Human, Dwarf, Felinid]
-  sponsorOnly: True
+  speciesRestriction: [Human, Dwarf, Felinid, SlimePerson]
   coloring:
     default:
       type:
