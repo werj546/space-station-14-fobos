@@ -6307,3 +6307,10 @@ Entries:
   changes:
   - type: Tweak
     message: Шейдер термалов стал в 1.5 раза менее ярким.
+- id: 613
+  author: sastr457
+  time: '2026-08-20T02:35:01.731701+00:00'
+  pr: 2190
+  changes:
+  - type: Fix
+    message: Лошадка 🐎
