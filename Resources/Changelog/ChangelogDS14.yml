@@ -6345,3 +6345,12 @@ Entries:
   changes:
   - type: Tweak
     message: Респрайт питательного | волокнистого батончика и брауни by mutemaid
+- id: 618
+  author: pe4enkakris
+  time: '2026-08-21T10:50:47.177519+00:00'
+  pr: 2194
+  changes:
+  - type: Tweak
+    message: Отныне мухтар появляется в своей броне.
+  - type: Fix
+    message: Сетевые ошибки в компоненте кулера.
