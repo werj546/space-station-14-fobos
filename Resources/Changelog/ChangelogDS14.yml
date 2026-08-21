@@ -6314,3 +6314,10 @@ Entries:
   changes:
   - type: Fix
     message: Лошадка 🐎
+- id: 614
+  author: pe4enkakris
+  time: '2026-08-21T10:38:09.989506+00:00'
+  pr: 2196
+  changes:
+  - type: Tweak
+    message: Респрайт медицинского сканера и капсулы клонирования by amaliz
