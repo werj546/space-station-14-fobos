@@ -131,7 +131,7 @@
     - MindRoleGhostRoleFreeAgent
     requirements:
     - !type:OverallPlaytimeRequirement
-      time: 216000 # 60 hours
+      time: 288000 # 80 hours
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
