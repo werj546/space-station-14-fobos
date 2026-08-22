@@ -6428,3 +6428,10 @@ Entries:
   - type: Tweak
     message: Спрайт скафандра бригмедика, а так же Scar-L. Спрайты нарисованы pyfya(Urani)
       (discord)
+- id: 627
+  author: CyberBobeks
+  time: '2026-08-22T14:49:52.741482+00:00'
+  pr: 2214
+  changes:
+  - type: Fix
+    message: Авто-отмена формирования списка изменений при очереди более двух задач.
