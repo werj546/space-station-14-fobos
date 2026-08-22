@@ -6578,3 +6578,10 @@ Entries:
   changes:
   - type: Add
     message: Система обратного рига добавлена на сервер.
+- id: 647
+  author: pe4enkakris
+  time: '2026-08-22T18:16:37.121489+00:00'
+  pr: 2216
+  changes:
+  - type: Add
+    message: Карта Avrite и Plasma вернулись в пулл в качестве эксперимента
