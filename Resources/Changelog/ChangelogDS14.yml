@@ -6518,3 +6518,10 @@ Entries:
   changes:
   - type: Add
     message: Блокировка эвака теперь сама отключается после окончания раунда
+- id: 639
+  author: Atickov
+  time: '2026-08-22T15:33:14.628401+00:00'
+  pr: 2154
+  changes:
+  - type: Tweak
+    message: Крутая карта Рич By ViviWewe
