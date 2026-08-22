@@ -6504,3 +6504,10 @@ Entries:
   changes:
   - type: Fix
     message: ХС-67 возращена в игру.
+- id: 637
+  author: Atickov
+  time: '2026-08-22T15:29:17.364950+00:00'
+  pr: 2161
+  changes:
+  - type: Fix
+    message: Дракон больше не гибается живым от дубинки
