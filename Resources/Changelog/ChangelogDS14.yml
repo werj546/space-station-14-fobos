@@ -6571,3 +6571,10 @@ Entries:
   changes:
   - type: Add
     message: Администрации добавлены шаблоны объявлений
+- id: 646
+  author: IvanKuvalda
+  time: '2026-08-22T17:18:39.634314+00:00'
+  pr: 2142
+  changes:
+  - type: Add
+    message: Система обратного рига добавлена на сервер.
