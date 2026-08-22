@@ -6449,3 +6449,10 @@ Entries:
   changes:
   - type: Tweak
     message: спрайт короля обезьян by mutemaid
+- id: 630
+  author: Atickov
+  time: '2026-08-22T15:02:17.002897+00:00'
+  pr: 2177
+  changes:
+  - type: Fix
+    message: В блобе больше не могут появится ксеноборги
