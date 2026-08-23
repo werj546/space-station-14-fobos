@@ -740,6 +740,7 @@
   id: WeaponAdvancedLaser
   description: An experimental high-energy laser pistol with a self-charging nuclear battery.
   components:
+  - type: Akimbo # DS14
   - type: Item
     size: Normal
     shape:
