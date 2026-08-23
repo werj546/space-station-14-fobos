@@ -6635,3 +6635,10 @@ Entries:
   changes:
   - type: Fix
     message: Голопаразиты больше не падают в бездны
+- id: 651
+  author: pe4enkakris
+  time: '2026-08-23T19:49:24.145099+00:00'
+  pr: 2218
+  changes:
+  - type: Add
+    message: Шлюзы для карты Serpent(спрайт как у тайпана)
