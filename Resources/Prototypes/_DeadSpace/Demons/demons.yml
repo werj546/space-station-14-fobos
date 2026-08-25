@@ -97,6 +97,7 @@
   - type: ZombieImmune
   - type: ImmunitetInfectionDead
   - type: PassiveDamage
+    intervalHaltOnDamageTaken: 5s
     allowedStates:
     - Alive
     - Critical
@@ -588,7 +589,6 @@
     whitelist:
       components:
       - Door
-      tags:
       - Wall
   - type: Puller
     needsHands: false

@@ -107,12 +107,14 @@ public abstract partial class SharedGunSystem : EntitySystem
         InitializeBattery();
         InitializeCartridge();
         InitializeChamberMagazine();
+        InitializeCustomAmmoCounter();
         InitializeMagazine();
         InitializeRevolver();
         InitializeBasicEntity();
         InitializeClothing();
         InitializeContainer();
         InitializeSolution();
+        InitializeTargetFinder(); // DS14 - pre-v288 explicit event subscriptions (#45247)
 
         // Interactions
         SubscribeLocalEvent<GunComponent, GetVerbsEvent<AlternativeVerb>>(OnAltVerb);
@@ -827,6 +829,7 @@ public enum AmmoVisuals : byte
     AmmoCount,
     AmmoMax,
     HasAmmo, // used for generic visualizers. c# stuff can just check ammocount != 0
+    IsFull, // used for generic visualizers. c# stuff can just check ammocount == ammomax
     MagLoaded,
     BoltClosed,
 }
