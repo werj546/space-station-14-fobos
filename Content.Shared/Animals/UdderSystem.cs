@@ -93,7 +93,12 @@ public sealed class UdderSystem : EntitySystem
     {
         if (!Resolve(udder, ref udder.Comp))
             return;
-
+        // ds-14-start
+        if (!_mobState.IsAlive(udder.Owner)) {
+            _popupSystem.PopupEntity(Loc.GetString("udder-system-dead"), userUid, PopupType.Small);
+            return;
+        }
+        // ds-14-end
         var doargs = new DoAfterArgs(EntityManager, userUid, 5, new MilkingDoAfterEvent(), udder, udder, used: containerUid)
         {
             BreakOnMove = true,
@@ -111,7 +116,6 @@ public sealed class UdderSystem : EntitySystem
 
         if (!_solutionContainerSystem.ResolveSolution(entity.Owner, entity.Comp.SolutionName, ref entity.Comp.Solution, out var solution))
             return;
-
         if (!_solutionContainerSystem.TryGetRefillableSolution(args.Args.Used.Value, out var targetSoln, out var targetSolution))
             return;
 
@@ -139,7 +143,6 @@ public sealed class UdderSystem : EntitySystem
              !args.CanInteract ||
              !HasComp<RefillableSolutionComponent>(args.Using.Value))
             return;
-
         var uid = entity.Owner;
         var user = args.User;
         var used = args.Using.Value;
@@ -147,6 +150,16 @@ public sealed class UdderSystem : EntitySystem
         {
             Act = () =>
             {
+                // ds-14-start
+                if (!_mobState.IsAlive(uid)) {
+                    _popupSystem.PopupEntity(Loc.GetString("udder-system-dead"), user, PopupType.Small);
+                    return;
+                }
+                if (TryComp<OpenableComponent>(used, out var openable) && !openable.Opened) {
+                    _popupSystem.PopupClient(Loc.GetString("udder-system-container-closed"), uid, user);
+                    return;
+                }
+                // ds-14-end
                 AttemptMilk(uid, user, used);
             },
             Text = Loc.GetString("udder-system-verb-milk"),
