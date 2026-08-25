@@ -7,6 +7,12 @@ comp-containment-disconnected = Генератора сдерживающего 
 comp-containment-anchor-warning = Вы не можете открепить генератор сдерживающего поля пока установлен барьер!
 comp-containment-toggle-warning = Вы не можете переключить генератор, пока он подсоединён.
 comp-containment-hack-inactive = Генератор сдерживающего поля не работает!
+comp-containment-destabilization-announcement = Внимание! Зафиксирована дестабилизация генератора энергетического поля, расчетное местоположение - { $location }. Требуется немедленно инициировать процедуру по стабилизации поля! Расчётное время до фатальной дестабилизации - { $duration ->
+    [60] одна минута
+    [150] две с половиной минуты
+   *[other] { $duration } секунд
+}.
+comp-containment-destabilization-announcement-sender = Автоматические Системы Станции
 comp-containment-stabilization-hit = Нестабильность генератора ослабевает. Но этого все ещё мало...
 comp-containment-stabilized = Генератор поля стабилизируется!
 comp-containment-kick-verb = Пнуть ногой

@@ -74,6 +74,8 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
         if (!HasComp<ChangelingIdentityComponent>(ent))
             return;
 
+        args.Handled = true; // DS14 - opening the transformation BUI is a successful action.
+
         if (!_ui.IsUiOpen((ent, userInterfaceComp), ChangelingTransformUiKey.Key, args.Performer))
         {
             _ui.OpenUi((ent, userInterfaceComp), ChangelingTransformUiKey.Key, args.Performer);
@@ -131,6 +133,14 @@ public sealed partial class ChangelingTransformSystem : EntitySystem
     {
         if (!Resolve(ent, ref ent.Comp))
             return;
+
+        // DS14-start
+        if (TryComp<HumanoidAppearanceComponent>(targetIdentity, out var humanoid) && humanoid.Species == "IPC")
+        {
+            _popup.PopupEntity(Loc.GetString("changeling-transform-attempt-failed-ipc"), ent.Owner, ent.Owner, PopupType.MediumCaution);
+            return;
+        }
+        // DS14-end
 
         var selfMessage = Loc.GetString("changeling-transform-attempt-self", ("user", Identity.Entity(ent.Owner, EntityManager)));
         var othersMessage = Loc.GetString("changeling-transform-attempt-others", ("user", Identity.Entity(ent.Owner, EntityManager)));

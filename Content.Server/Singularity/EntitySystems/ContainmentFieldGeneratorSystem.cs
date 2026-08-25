@@ -1,7 +1,9 @@
 using System.Linq;
 using Content.Server.Administration.Logs;
+using Content.Server.Chat.Systems;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.ParticleAccelerator.Components;
+using Content.Server.Pinpointer;
 using Content.Server.Popups;
 using Content.Server.Singularity.Events;
 using Content.Shared.Construction.Components;
@@ -17,9 +19,12 @@ using Content.Shared.Verbs;
 using Content.Shared.Weapons.Hitscan.Components;
 using Content.Shared.Weapons.Hitscan.Events;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio;
+using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -31,13 +36,21 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
 {
     // DS14-start
     private static readonly EntProtoId AntiParticlesProjectile = "AntiParticlesProjectile";
+    private static readonly SoundSpecifier DestabilizationAnnouncementSound = new SoundPathSpecifier("/Audio/Effects/alert.ogg");
+    private static readonly TimeSpan DestabilizationAnnouncementCooldown = TimeSpan.FromMinutes(1);
+    private const string DestabilizationAnnouncement = "comp-containment-destabilization-announcement";
+    private const string DestabilizationAnnouncementSender = "comp-containment-destabilization-announcement-sender";
+    private const string DestabilizationAnnouncementVoice = "Glados";
     private const int StabilizationHitsRequired = 2;
     private const float KickStabilizationChance = 0.2f;
+    private TimeSpan _nextDestabilizationAnnouncementTime;
     // DS14-end
 
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AppearanceSystem _visualizer = default!;
+    [Dependency] private readonly ChatSystem _chat = default!; // DS14
     [Dependency] private readonly ExplosionSystem _explosion = default!; // DS14
+    [Dependency] private readonly NavMapSystem _navMap = default!; // DS14
     [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
@@ -107,7 +120,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
     {
         if (args.Handled ||
             args.SourceUid is not { } source ||
-            !HasComp<ContainmentFieldHackComponent>(source) ||
+            !TryComp<ContainmentFieldHackComponent>(source, out var hack) ||
             generator.Comp.HackEndTime != null)
         {
             return;
@@ -126,8 +139,10 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
             return;
         }
 
-        var endTime = _timing.CurTime + TimeSpan.FromSeconds(ContainmentFieldGeneratorComponent.HackDurationSeconds);
+        var durationSeconds = Math.Max(hack.DestabilizationDuration, 0f);
+        var endTime = _timing.CurTime + TimeSpan.FromSeconds(durationSeconds);
         var generatorPosition = _transformSystem.GetWorldPosition(generator);
+        generator.Comp.HackDurationSeconds = durationSeconds;
         generator.Comp.HackEndTime = endTime;
         generator.Comp.StabilizationEndTime = null;
         generator.Comp.StabilizationHits = 0;
@@ -145,6 +160,7 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
                 }
 
                 var fieldDistance = (_transformSystem.GetWorldPosition(field) - generatorPosition).Length();
+                fieldComp.HackDurationSeconds = durationSeconds;
                 fieldComp.HackEndTime = endTime;
                 fieldComp.StabilizationEndTime = null;
                 fieldComp.HackIntensity = Math.Clamp(
@@ -155,7 +171,33 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
             }
         }
 
+        AnnounceDestabilization(generator, durationSeconds);
         args.Handled = true;
+    }
+
+    private void AnnounceDestabilization(EntityUid generator, float durationSeconds)
+    {
+        if (_timing.CurTime < _nextDestabilizationAnnouncementTime)
+            return;
+
+        var xform = Transform(generator);
+        if (xform.MapID == MapId.Nullspace)
+            return;
+
+        var location = FormattedMessage.RemoveMarkupOrThrow(_navMap.GetNearestBeaconString((generator, xform)));
+        var announcement = Loc.GetString(
+            DestabilizationAnnouncement,
+            ("location", location),
+            ("duration", durationSeconds));
+        _nextDestabilizationAnnouncementTime = _timing.CurTime + DestabilizationAnnouncementCooldown;
+
+        _chat.DispatchAdminFilteredAnnouncement(
+            Filter.Empty().AddInMap(xform.MapID, EntityManager),
+            announcement,
+            sender: Loc.GetString(DestabilizationAnnouncementSender),
+            announcementSound: DestabilizationAnnouncementSound,
+            originalMessage: announcement,
+            voice: DestabilizationAnnouncementVoice);
     }
 
     private void OnGetAlternativeVerbs(
@@ -201,9 +243,9 @@ public sealed class ContainmentFieldGeneratorSystem : EntitySystem
 
         var now = _timing.CurTime;
         var duration = Math.Clamp(
-            ContainmentFieldGeneratorComponent.HackDurationSeconds - (float) (hackEndTime - now).TotalSeconds,
+            generator.Comp.HackDurationSeconds - (float) (hackEndTime - now).TotalSeconds,
             0f,
-            ContainmentFieldGeneratorComponent.HackDurationSeconds);
+            generator.Comp.HackDurationSeconds);
         var endTime = now + TimeSpan.FromSeconds(duration);
         generator.Comp.HackEndTime = null;
         generator.Comp.StabilizationEndTime = endTime;
