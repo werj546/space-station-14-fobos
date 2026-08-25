@@ -6902,3 +6902,10 @@ Entries:
     message: Cooldown использования запроса помощи при помощи противогазов.
   - type: Fix
     message: Спам при надевании/снятии масок.
+- id: 668
+  author: CyberBobeks
+  time: '2026-08-25T16:24:01.674013+00:00'
+  pr: 2237
+  changes:
+  - type: Add
+    message: Генокрад в режим "Выживание".
