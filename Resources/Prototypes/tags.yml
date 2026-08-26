@@ -1287,6 +1287,9 @@
   id: SecurityHelmet # ConstructionGraph: HelmetJustice
 
 - type: Tag
+  id: Sheep # Reproductive partner key
+
+- type: Tag
   id: Sheet # MaterialStorage whitelist for many machines and lathes. Storage whitelist: MaterialBag
 
 - type: Tag
@@ -1582,6 +1585,9 @@
   id: WriteIgnoreStamps # Used by PaperSystem to allow tagged entity to bypass stamps.
 
 ## X ##
+
+- type: Tag
+  id: XenoborgCrystal # MaterialStorage whitelist: Mothership core
 
 - type: Tag
   id: XenoborgGhostrole # spawn whitelist : SpawnPointGhostRoleXenoborg
