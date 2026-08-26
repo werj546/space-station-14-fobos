@@ -22,7 +22,7 @@ public sealed partial class MessagingControls : TabContainer
     [Dependency] private readonly IGameTiming _timing = default!;
     // DS14-end
 
-    private SharedAppearanceSystem _appearance;
+    private SharedAppearanceSystem _appearance = default!;
     private readonly string[] _lineEndings = new[] { "\r\n", "\n" };
     private const int MaxScreenCharacters = 32;
 
@@ -80,6 +80,21 @@ public sealed partial class MessagingControls : TabContainer
         SyncButtonState();
         UpdateScreenText();
     }
+
+#if DEBUG
+    /// <summary>
+    /// Loads the real control tree for the deterministic UI renderer without requiring an active game session.
+    /// Entity systems are intentionally not touched; the fixture supplies a static preview texture instead.
+    /// </summary>
+    internal MessagingControls(bool renderFixture)
+    {
+        RobustXamlLoader.Load(this);
+
+        BroadcastTopCharLimitLabel.Text = "8/32";
+        BroadcastBottomCharLimitLabel.Text = "0/32";
+        BroadcastButton.Disabled = false;
+    }
+#endif
 
     public void SetBroadcastDisplayEntity(EntProtoId broadcastEntityId)
     {
