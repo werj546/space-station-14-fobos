@@ -6957,3 +6957,10 @@ Entries:
   changes:
   - type: Add
     message: Новый дизайн для остальных UI-интерфейсов.
+- id: 673
+  author: IvanKuvalda
+  time: '2026-08-26T18:17:17.616134+00:00'
+  pr: 2245
+  changes:
+  - type: Add
+    message: Добавлена ранняя альфа версия рабочей блюспейс артиллерии.
