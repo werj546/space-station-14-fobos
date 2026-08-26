@@ -6950,3 +6950,10 @@ Entries:
     message: Отображение плюшевых овец в руках.
   - type: Fix
     message: Цели генокрада.
+- id: 672
+  author: CyberBobeks
+  time: '2026-08-26T16:56:00.799435+00:00'
+  pr: 2244
+  changes:
+  - type: Add
+    message: Новый дизайн для остальных UI-интерфейсов.
