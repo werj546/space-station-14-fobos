@@ -1748,7 +1748,7 @@
   parent: BasePlushieDeadSpaceMisc
   id: PlushieSastrBon
   name: плюшевый Бон
-  description: Просто поц ннчик первый раз вижу реальна и так далее.
+  description: Просто поц, ннчик первый раз вижу реальна и так далее КЛАЦ-КЛАЦ!
   components:
   - type: Sprite
     state: plushie_sastr_bon
