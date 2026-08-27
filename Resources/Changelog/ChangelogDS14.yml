@@ -6964,3 +6964,10 @@ Entries:
   changes:
   - type: Add
     message: Добавлена ранняя альфа версия рабочей блюспейс артиллерии.
+- id: 674
+  author: IvanKuvalda
+  time: '2026-08-27T06:29:05.407563+00:00'
+  pr: 2250
+  changes:
+  - type: Add
+    message: Гост пинги приходят и для игроков на арене
