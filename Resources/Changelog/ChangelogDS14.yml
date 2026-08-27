@@ -6971,3 +6971,10 @@ Entries:
   changes:
   - type: Add
     message: Гост пинги приходят и для игроков на арене
+- id: 675
+  author: CyberBobeks
+  time: '2026-08-27T07:43:27.971710+00:00'
+  pr: 2251
+  changes:
+  - type: Fix
+    message: Некоторые аспекты UI.
