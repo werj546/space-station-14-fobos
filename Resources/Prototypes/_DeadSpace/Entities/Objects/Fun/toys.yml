@@ -1751,7 +1751,7 @@
   description: Просто поц ннчик первый раз вижу реальна и так далее.
   components:
   - type: Sprite
-    state: plushie_bon
+    state: plushie_sastr_bon
   - type: TTS
     voice: Thorbjorn
   - type: SpeakOnTrigger
