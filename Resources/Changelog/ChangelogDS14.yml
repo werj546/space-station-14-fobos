@@ -7031,3 +7031,10 @@ Entries:
     message: Режим администратора при обыске работает лишь в aghost'е.
   - type: Fix
     message: Обыск генокрада.
+- id: 679
+  author: CyberBobeks
+  time: '2026-08-27T16:42:31.596675+00:00'
+  pr: 2255
+  changes:
+  - type: Fix
+    message: Поведение консоли БСА.
