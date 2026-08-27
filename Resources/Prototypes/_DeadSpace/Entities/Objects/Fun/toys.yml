@@ -1753,7 +1753,7 @@
   - type: Sprite
     state: plushie_sastr_bon
   - type: TTS
-    voice: Thorbjorn
+    voice: Torbjorn
   - type: SpeakOnTrigger
     pack: PlushieSastrBonSpeech
   - type: UseDelay
