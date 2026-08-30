@@ -7166,3 +7166,10 @@ Entries:
   changes:
   - type: Tweak
     message: Возвращены стары спрайты пауков ужаса.
+- id: 690
+  author: IvanKuvalda
+  time: '2026-08-30T10:45:42.007156+00:00'
+  pr: 2270
+  changes:
+  - type: Add
+    message: Доступы НИО для протолатов. НИО теперь снова великое.
